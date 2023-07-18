@@ -19,5 +19,10 @@
         "psr-4": {
             "VergilLai\\LaravelGoeasy\\": "src"
         }
+    },
+    "laravel": {
+        "providers": [
+            "VergilLai\\LaravelGoeasy\\GoeasyServiceProvider"
+        ]
     }
 }
