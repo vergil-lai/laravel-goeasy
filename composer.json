@@ -20,9 +20,11 @@
             "VergilLai\\LaravelGoeasy\\": "src"
         }
     },
-    "laravel": {
-        "providers": [
-            "VergilLai\\LaravelGoeasy\\GoeasyServiceProvider"
-        ]
+    "extra": {
+        "laravel": {
+            "providers": [
+                "VergilLai\\LaravelGoeasy\\GoeasyServiceProvider"
+            ]
+        }
     }
 }
