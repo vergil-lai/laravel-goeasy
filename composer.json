@@ -1,0 +1,23 @@
+{
+    "name": "vergil-lai/laravel-goeasy",
+    "description": "Package description here.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vergil",
+            "email": "vergil@vip.163.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "ext-openssl": "*",
+        "laravel/framework": "^9.0|^10.0",
+        "guzzlehttp/guzzle": "^7.2",
+        "firebase/php-jwt": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "VergilLai\\LaravelGoeasy\\": "src"
+        }
+    }
+}
