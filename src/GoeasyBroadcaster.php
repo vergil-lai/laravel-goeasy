@@ -25,13 +25,13 @@ class GoeasyBroadcaster extends Broadcaster
 
     public function broadcast(array $channels, $event, array $payload = [])
     {
-        $channels =$this->formatChannels($channels);
+        $channels = $this->formatChannels($channels);
 
         $payload['event'] = $event;
 
         foreach ($channels as $channel) {
             if (str_starts_with($channel, 'private-')) {
-                $channel = 'protected-' . substr($channel, 8);
+                $channel = str_replace('private-', 'protected-', $channel);
             }
             $content = json_encode($payload);
             $this->client->publish($channel, $content);
