@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'common_key' => env('COMMON_KEY', ''),
+    'common_key' => env('GOEASY_COMMON_KEY', ''),
 
     'subscribe_key' => env('GOEASY_SUBSCRIBE_KEY', ''),
 

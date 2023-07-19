@@ -1,28 +1,74 @@
 <h1 align="center"> laravel-goeasy </h1>
 
-<p align="center"> .</p>
+## laravel-goeasy
+[GoEasy](https://www.goeasy.io/)的[Laravel广播](https://laravel.com/docs/10.x/broadcasting)驱动
 
+## 安装需求
 
-## Installing
+* PHP >= 8.0
+* Laravel >= 9.x | 10.x
+
+## 安装
 
 ```shell
-$ composer require vergil-lai/laravel-goeasy -vvv
+$ composer require vergil-lai/laravel-goeasy
 ```
 
-## Usage
+## Laravel使用
 
-TODO
+### 配置
 
-## Contributing
+在 `config/broadcasting.php` 的`connections`中添加以下配置：
 
-You can contribute in one of three ways:
+```php
+'goeasy' => [
+    'driver' => 'goeasy',
+],
+```
 
-1. File bug reports using the [issue tracker](https://github.com/vergil-lai/laravel-goeasy/issues).
-2. Answer questions or fix bugs on the [issue tracker](https://github.com/vergil-lai/laravel-goeasy/issues).
-3. Contribute new features or update the wiki.
+在`configs/app.php`的`aliases`中加入：
 
-_The code contribution process is not very formal. You just need to make sure that you follow the PSR-0, PSR-1, and PSR-2 coding guidelines. Any new code contributions must be accompanied by unit tests where applicable._
+```php
+'Pubsub' => \VergilLai\LaravelGoeasy\Facades\Pubsub::class,
+```
+
+在[GoEasy](https://www.goeasy.io/)中创建应用，获取`Common Key`和`Subscribe Key`，
+或者使用[OTP](https://docs.goeasy.io/2.x/common/otp)的`Rest key`和`Secret key`
+
+在`.env`文件加入：
+
+```dotenv
+BROADCAST_DRIVER=goeasy
+GOEASY_HOST=https://rest-hz.goeasy.io 
+## 或rest-singapore.goeasy.io
+GOEASY_COMMON_KEY=your-common-key
+GOEASY_SUBSCRIBE_KEY=your-subscribe-key
+```
+或
+
+```dotenv
+GOEASY_REST_KEY=your-rest-key
+GOEASY_SECRET_KEY=your-secret-key
+```
+
+这样，就可以使用`broadcast`广播事件了。
+详情请参阅[Laravel文档](https://laravel.com/docs/10.x/broadcasting)。
+
+### 获取[OTP](https://docs.goeasy.io/2.x/common/otp)和[AccessToken](https://docs.goeasy.io/2.x/common/security/authorization)
+
+使用`Pubsub`Facade方法：
+
+```php
+Pubsub::otp();
+Pubsub::makeAccessToken('your user id', 'channel name', $readable, $writeable),
+```
+
+
+## 客户端使用
+
+请参阅[GoEasy官方文档](https://docs.goeasy.io/2.x/)。
+
 
 ## License
 
-MIT
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
