@@ -1,6 +1,6 @@
 {
     "name": "vergil-lai/laravel-goeasy",
-    "description": "Package description here.",
+    "description": "GoEasy的Laravel广播驱动",
     "license": "MIT",
     "authors": [
         {
