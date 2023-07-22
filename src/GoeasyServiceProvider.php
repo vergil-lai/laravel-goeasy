@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace VergilLai\LaravelGoeasy;
 
 use Illuminate\Support\ServiceProvider;
-use VergilLai\LaravelGoeasy\Clients\Pubsub;
 use Illuminate\Broadcasting\BroadcastManager;
 
 class GoeasyServiceProvider extends ServiceProvider
@@ -19,15 +18,15 @@ class GoeasyServiceProvider extends ServiceProvider
         }
 
         $broadcastManager->extend('goeasy', function ($app) {
-            return new GoeasyBroadcaster($app->make('goeasy-pubsub'));
+            return new GoeasyBroadcaster($app->make('goeasy')->pubsub());
         });
     }
 
     public function register(): void
     {
-        $this->app->singleton('goeasy-pubsub', function ($app) {
+        $this->app->singleton('goeasy', function ($app) {
             $config = $app->make('config')->get('goeasy');
-            return new Pubsub($config);
+            return new GoEasy($config);
         });
     }
 }

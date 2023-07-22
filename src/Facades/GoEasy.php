@@ -4,10 +4,10 @@ namespace VergilLai\LaravelGoeasy\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Pubsub extends Facade
+class GoEasy extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'goeasy-pubsub';
+        return 'goeasy';
     }
 }

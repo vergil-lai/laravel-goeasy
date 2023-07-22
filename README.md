@@ -29,7 +29,7 @@ $ composer require vergil-lai/laravel-goeasy
 在`configs/app.php`的`aliases`中加入：
 
 ```php
-'Pubsub' => \VergilLai\LaravelGoeasy\Facades\Pubsub::class,
+'GoEasy' => \VergilLai\LaravelGoeasy\Facades\GoEasy::class,
 ```
 
 在[GoEasy](https://www.goeasy.io/)中创建应用，获取`Common Key`和`Subscribe Key`，
@@ -56,11 +56,11 @@ GOEASY_SECRET_KEY=your-secret-key
 
 ### 获取[OTP](https://docs.goeasy.io/2.x/common/otp)和[AccessToken](https://docs.goeasy.io/2.x/common/security/authorization)
 
-使用`Pubsub`Facade方法：
+使用`GoEasy`Facade方法：
 
 ```php
-Pubsub::otp();
-Pubsub::makeAccessToken('your user id', 'channel name', $readable, $writeable),
+GoEasy::otp();
+GoEasy::pubsub()->makeAccessToken('your user id', 'channel name', $readable, $writeable),
 ```
 
 

@@ -31,15 +31,13 @@ class GoeasyBroadcaster extends Broadcaster
 
         foreach ($channels as $channel) {
             if (str_starts_with($channel, 'private-')) {
-                $channel = str_replace('private-', 'protected-', $channel);
+                $channel = 'protected-' . substr($channel, 8);
             }
-            $content = json_encode($payload);
-            $this->client->publish($channel, $content);
+            $content = json_encode($payload, JSON_UNESCAPED_UNICODE);
+            try {
+                $this->client->publish($channel, $content);
+            } catch (\Throwable) {
+            }
         }
-    }
-
-    protected function formatChannels(array $channels)
-    {
-        return array_map(fn ($channel) => (string) $channel, $channels);
     }
 }
