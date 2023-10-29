@@ -2,6 +2,7 @@
 
 namespace VergilLai\LaravelGoeasy;
 
+use Exception;
 use VergilLai\LaravelGoeasy\Clients\IM;
 use VergilLai\LaravelGoeasy\Clients\Pubsub;
 
@@ -22,7 +23,7 @@ class GoEasy
             (!empty($this->config['common_key']) ? $this->config['common_key'] : throw new Exception('appkey is required'));
 
         if (filter_var($this->config['host'], FILTER_VALIDATE_URL) === false) {
-            throw new \Exception('invalid host');
+            throw new Exception('invalid host');
         }
         $this->host = rtrim($this->config['host'], '/');
     }
