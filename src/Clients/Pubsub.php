@@ -16,16 +16,14 @@ class Pubsub extends AbstractClient
      * @return bool
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public function publish(array $params): array
+    public function publish(array $params): bool
     {
-        $response = $this->client->post('v2/pubsub/publish', [
-            'json' => [
-                'appkey' => $this->appkey,
-                ...$params,
-            ],
-        ]);
+        $response = Http::retry(3, 100)->post($this->host . '/v2/pubsub/publish',[
+            'appkey' => $this->appkey,
+            ...$params,
+        ])->throw();
 
-        return json_decode($response->getBody()->getContents(), true);
+        return $response->successful();
     }
 
     /**

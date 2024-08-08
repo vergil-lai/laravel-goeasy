@@ -34,8 +34,14 @@ class GoeasyBroadcaster extends Broadcaster
                 $channel = 'protected-' . substr($channel, 8);
             }
             $content = json_encode($payload, JSON_UNESCAPED_UNICODE);
+            $params = [
+                'channel' => $channel,
+                'content' => $content,
+                'notification_title' => $payload['notification_title']??'',
+                'notification_body' => $payload['notification_body']??'',
+            ];
             try {
-                $this->client->publish($channel, $content);
+                $this->client->publish($params);
             } catch (\Throwable) {
             }
         }
