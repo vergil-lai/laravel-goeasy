@@ -12,20 +12,20 @@ class Pubsub extends AbstractClient
     /**
      * Rest接口服务端发送
      * @see https://docs.goeasy.io/2.x/pubsub/message/rest-publish
-     * @param  string  $channel channel
-     * @param  string  $message 发送的消息内容
+     * @param  array $params
      * @return bool
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public function publish(string $channel, string $message): bool
+    public function publish(array $params): array
     {
-        $response = Http::retry(3, 100)->post($this->host . '/v2/pubsub/publish',[
-            'appkey' => $this->appkey,
-            'channel' => $channel,
-            'content' => $message,
-        ])->throw();
+        $response = $this->client->post('v2/pubsub/publish', [
+            'json' => [
+                'appkey' => $this->appkey,
+                ...$params,
+            ],
+        ]);
 
-        return $response->successful();
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
